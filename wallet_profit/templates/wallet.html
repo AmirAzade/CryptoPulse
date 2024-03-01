@@ -1,0 +1,469 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'favicon.png' %}" type="image/x-icon">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'favicon.png' %}">
+
+    <!-- Title -->
+    <title>Tools</title>
+
+    <!--Bootstrap.min css-->
+    <!-- <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}"> -->
+
+    <!-- Dashboard css -->
+    <link href="{% static 'style.css' %}" rel="stylesheet">
+
+    <!-- Custom scroll bar css-->
+    <link href="{% static 'jquery.mCustomScrollbar.css' %}" rel="stylesheet">
+
+    <!-- Horizontal-menu css -->
+    <link href="{% static 'fade-down.css' %}" rel="stylesheet">
+    <link href="{% static 'dark-horizontalmenu.css' %}" rel="stylesheet">
+
+    <!--Daterangepicker css-->
+    <link href="{% static 'daterangepicker.css' %}" rel="stylesheet">
+
+    <!-- Sidebar Accordions css -->
+    <link href="{% static 'dark-easy-responsive-tabs.css' %}" rel="stylesheet">
+
+    <!-- Rightsidebar css -->
+    <link href="{% static 'dark-sidebar.css' %}" rel="stylesheet">
+
+    <!---Font icons css-->
+    <link href="{% static 'plugin.css' %}" rel="stylesheet">
+    <link href="{% static 'icons.css' %}" rel="stylesheet">
+    <link href="{% static 'font-awesome.min.css' %}" rel="stylesheet">
+
+    <style type="text/css">
+        .jqstooltip {
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            visibility: hidden;
+            background: rgb(0, 0, 0) transparent;
+            background-color: rgba(0, 0, 0, 0.6);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+            -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+            color: white;
+            font: 10px arial, san serif;
+            text-align: left;
+            white-space: nowrap;
+            padding: 5px;
+            border: 1px solid white;
+            z-index: 10000;
+        }
+
+        .jqsfield {
+            color: white;
+            font: 10px arial, san serif;
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body class="app sidebar-mini rtl sidebar-gone">
+    <div class="horizontalMenucontainer">
+
+
+
+        <!--Global-Loader-->
+        <div id="global-loader" style="display: none;">
+            <img src="{% static 'loader.svg' %}" alt="loader">
+        </div>
+
+        <div class="page">
+            <div class="page-main">
+                <!--app-header-->
+                <div class="app-header header hor-topheader d-flex fixed-header">
+                    <div class="container">
+                        <div class="d-flex">
+                            <a class="header-brand" href="{% static 'index.css' %}">
+                                <img src="{% static 'logo1.png' %}" class="header-brand-img main-logo" alt="Hogo logo">
+                                <img src="{% static 'icon.png' %}" class="header-brand-img icon-logo" alt="Hogo logo">
+                            </a><!-- logo-->
+                            <!-- <a id="horizontal-navtoggle" class="animated-arrow hor-toggle"><span></span></a>
+							<a href="{% static '#" data-toggle="search" class="nav-link nav-link  navsearch"><i class="fa fa-search"></i></a><!-- search icon -->
+                            <div class="header-form">
+
+                            </div>
+
+                            <div class="d-flex order-lg-2 ml-auto header-rightmenu">
+                                <div class="dropdown">
+                                    <a class="nav-link icon full-screen-link" id="fullscreen-button">
+                                        <i class="fe fe-maximize-2"></i>
+                                    </a>
+                                </div><!-- full-screen -->
+
+                                <div class="dropdown header-user">
+                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+
+
+
+                                    </div>
+                                </div><!-- profile -->
+                                <div class="dropdown">
+
+                                </div><!-- Right-siebar-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="horizontal-main hor-menu clearfix">
+                    <div class="horizontal-mainwrapper container clearfix">
+                        <nav class="horizontalMenu clearfix">
+                            <div class="overlapblackbg"></div>
+
+                            <ul class="horizontalMenu-list">
+                                <li aria-haspopup="true"><a href="{% static 'index.css' %}" class="active"><i
+                                            class="fa fa-coffee"></i> Dashboard</a></li>
+
+                                <li aria-haspopup="true"><span class="horizontalMenu-click"><i
+                                            class="horizontalMenu-arrow fa fa-angle-down"></i></span><a href="#"
+                                        class="sub-icon "><i class="typcn typcn-device-desktop hor-icon"></i>
+                                        Information Gathering <i class="fa fa-angle-down horizontal-icon"></i></a>
+                                    <ul class="sub-menu">
+                                        <li aria-haspopup="true"><a href="{% static 'bypass-cloud.css' %}">Bypass Cloud
+                                                Flare </a>
+                                        </li>
+                                        <li aria-haspopup="true"><a href="{% static 'cms-detect.css' %}">Cms Detect</a>
+                                        </li>
+                                        <li aria-haspopup="true"><a href="{% static 'trace.css' %}">Trace Toute</a></li>
+                                        <li aria-haspopup="true"><a href="{% static 'reverseip.css' %}">Reverse IP</a>
+                                        </li>
+                                        <li aria-haspopup="true"><a href="{% static 'port-scan.css' %}">Port Scan</a>
+                                        </li>
+                                        <li aria-haspopup="true"><a href="{% static 'ip-loc.css' %}">IP location
+                                                Finder</a></li>
+                                        <li aria-haspopup="true"><a href="{% static 'http-header.css' %}">Show HTTP
+                                                Header</a></li>
+                                        <li aria-haspopup="true"><a href="{% static 'shared-dns.css' %}">Find Shared
+                                                DNS</a></li>
+                                        <li aria-haspopup="true"><a href="{% static 'whois.css' %}">Whois</a></li>
+                                        <li aria-haspopup="true"><a href="{% static 'dns-lookup.css' %}">DNS Lookup</a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li aria-haspopup="true"><a href="{% static 'exploits.css' %}" class=""><i
+                                            class="typcn typcn-arrow-move-outline"></i> Exploits</a></li>
+                                <li aria-haspopup="true"><span class="horizontalMenu-click"><i
+                                            class="horizontalMenu-arrow fa fa-angle-down"></i></span><a href="#"
+                                        class="sub-icon"><i class="typcn typcn-chart-pie-outline"></i> Social
+                                        Engineering <i class="fa fa-angle-down horizontal-icon"></i></a>
+                                    <ul class="sub-menu">
+                                        <li aria-haspopup="true"><a href="{% static 'get-data.css' %}">Get system
+                                                Information with
+                                                link </a></li>
+                                        <li aria-haspopup="true"><a href="{% static 'shot-webcam.css' %}">Screen Captrue
+                                                With Link</a>
+                                        </li>
+                                        <li aria-haspopup="true"><a href="{% static 'play-voice.css' %}">Play Sound With
+                                                Link</a></li>
+
+                                    </ul>
+                                </li>
+
+
+
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+
+                <div class="bg-white p-3 header-secondary header-submenu">
+                    <div class="container ">
+                        <div class="row">
+                            <div class="col">
+                                <div class="d-flex">
+                                    <button id="btn-reload" class="btn btn-danger"><i
+                                            class="fe fe-rotate-cw mr-1 mt-1"></i> Reload</button>
+
+                                </div>
+                            </div>
+                            <div class="col col-auto">
+                                <button id="btn-git" class="btn btn-light mt-4 mt-sm-0"><i
+                                        class="fe fe-github mr-1 mt-1"></i> Github</button>
+                                <button id="btn-tele" class="btn btn-primary mt-4 mt-sm-0"> <i
+                                        class="fa fa-telegram mr-1 mt-1"></i> Telegram Channel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container content-area">
+                    <div class="side-app">
+                        <div class="page-header">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                            </ol>
+                        </div>
+
+                        <form action="/wallet/" method="post">
+                            {% csrf_token %}
+                            <input type="text" name="token" placeholder="Enter nobitex token" value="{{static_token}}">
+                            <input type="submit" value="Submit">
+                        </form>
+
+                        <div class="row">
+                            <!-- table crypto  -->
+                            <div class="card mt-5  ">
+                                <div class="card-header border-0">
+                                    <h3 class="card-title">Last crypto price</h3>
+                                </div>
+                                <div class="table-responsive">
+                                    <div class="table-responsive">
+                                        <table class="table card-table text-nowrap">
+                                            <tbody>
+                                                <tr class="border-bottom">
+                                                    <th>Name</th>
+                                                    <th>Icon</th>
+                                                    <th>Price USD</th>
+                                                    <th>Price Toman</th>
+                                                    <th>% 24h</th>
+                                                    <th>market cap</th>
+                                                    <th>% weekly</th>
+                                                    <th>weekly Chart</th>
+
+                                                </tr>
+
+                                                {% for tr in tr_data %}
+                                                <tr class="border-bottom">
+                                                    <td id="{{tr.id}}">{{tr.coin}}</td>
+                                                    <td>
+                                                        <img src="{% static 'bitcoin.svg' %}" alt="Bitcoin"class="w-4 h-4">
+                                                    </td>
+                                                    <td id="price-usd0">Loading...</td>
+                                                    <td id="price-tmn0">{{tr.asset}}</td>
+                                                    <td id="change0" class="text-green">Loading...</td>
+                                                    <td id="market0">Loading...</td>
+                                                    <td id="week_change0" class="text-green">Loading...</td>
+                                                    <td><img id="chart0" src="" class="w-151 h-6"></td>
+                                                </tr>
+                                                {% endfor %}
+
+                                                <tr class="border-bottom">
+                                                    <td id="name1">Ethereum</td>
+                                                    <td><img src="{% static 'ethereum.svg' %}" alt="Ethereum"
+                                                            class="w-4 h-4"></td>
+                                                    <td id="price-usd1">Loading...</td>
+                                                    <td id="price-tmn1">Loading...</td>
+                                                    <td id="change1" class="text-green">Loading...</td>
+                                                    <td id="market1">Loading...</td>
+                                                    <td id="week_change1" class="text-green">Loading...</td>
+                                                    <td><img id="chart1" src="" class="w-151 h-6"></td>
+
+
+                                                </tr>
+                                                <tr class="border-bottom">
+                                                    <td id="name2">Tether</td>
+                                                    <td><img src="{% static 'tether-usdt-logo.png' %}" alt="tether"
+                                                            class="w-4 h-4"></td>
+                                                    <td id="price-usd2">Loading...</td>
+                                                    <td id="price-tmn2">Loading...</td>
+                                                    <td id="change2" class="text-green">Loading...</td>
+                                                    <td id="market2">Loading...</td>
+                                                    <td id="week_change2" class="text-green">Loading...</td>
+                                                    <td><img id="chart2" src="" class="w-151 h-6"></td>
+                                                </tr>
+                                                <tr class="border-bottom">
+                                                    <td id="name3">Ripple</td>
+                                                    <td><img src="{% static 'ripple.svg' %}" alt="ripple"
+                                                            class="w-4 h-4"></td>
+                                                    <td id="price-usd3">Loading...</td>
+                                                    <td id="price-tmn3">Loading...</td>
+                                                    <td id="change3" class="text-green">Loading...</td>
+                                                    <td id="market3">Loading...</td>
+                                                    <td id="week_change3" class="text-green">Loading...</td>
+                                                    <td><img id="chart3" src="" class="w-151 h-6"></td>
+                                                </tr>
+                                                <tr class="border-bottom">
+                                                    <td id="name4">Litecoin</td>
+                                                    <td><img src="{% static 'litecoin.svg' %}" alt="Cardano"
+                                                            class="w-4 h-4"></td>
+                                                    <td id="price-usd4">Loading...</td>
+                                                    <td id="price-tmn4">Loading...</td>
+                                                    <td id="change4" class="text-green">Loading...</td>
+                                                    <td id="market4">Loading...</td>
+                                                    <td id="week_change4" class="text-green">Loading...</td>
+                                                    <td><img id="chart4" src="" class="w-151 h-6"></td>
+                                                </tr>
+                                                <tr class="border-bottom">
+                                                    <td id="name5">Bitcoin Cash</td>
+                                                    <td><img src="{% static 'bitcoincash.svg' %}" alt="Litecoin"
+                                                            class="w-4 h-4"></td>
+                                                    <td id="price-usd5">Loading...</td>
+                                                    <td id="price-tmn5">Loading...</td>
+                                                    <td id="change5" class="text-green">Loading...</td>
+                                                    <td id="market5">Loading...</td>
+                                                    <td id="week_change5" class="text-green">Loading...</td>
+                                                    <td><img id="chart5" src="" class="w-151 h-6"></td>
+                                                </tr>
+                                                <tr class="border-bottom">
+                                                    <td id="name6">Cardano</td>
+                                                    <td><img src="{% static 'cardano.svg' %}" alt="EOS" class="w-4 h-4">
+                                                    </td>
+                                                    <td id="price-usd6">Loading...</td>
+                                                    <td id="price-tmn6">Loading...</td>
+                                                    <td id="change6" class="text-green">Loading...</td>
+                                                    <td id="market6">Loading...</td>
+                                                    <td id="week_change6" class="text-green">Loading...</td>
+                                                    <td><img id="chart6" src="" class="w-151 h-6"></td>
+                                                </tr>
+                                                <tr class="border-bottom">
+                                                    <td id="name7">Stellar</td>
+                                                    <td><img src="{% static 'stellar.svg' %}" alt="NEM" class="w-4 h-4">
+                                                    </td>
+                                                    <td id="price-usd7">Loading...</td>
+                                                    <td id="price-tmn7">Loading...</td>
+                                                    <td id="change7" class="text-green">Loading...</td>
+                                                    <td id="market7">Loading...</td>
+                                                    <td id="week_change7" class="text-green">Loading...</td>
+                                                    <td><img id="chart7" src="" class="w-151 h-6"></td>
+                                                </tr>
+                                                <tr class="border-bottom">
+                                                    <td id="name8">Eos</td>
+                                                    <td><img src="{% static 'monero.svg' %}" alt="Bitcoin"
+                                                            class="w-4 h-4"></td>
+                                                    <td id="price-usd8">Loading...</td>
+                                                    <td id="price-tmn8">Loading...</td>
+                                                    <td id="change8" class="text-green">Loading...</td>
+                                                    <td id="market8">Loading...</td>
+                                                    <td id="week_change8" class="text-green">Loading...</td>
+                                                    <td><img id="chart8" src="" class="w-151 h-6"></td>
+                                                </tr>
+                                                <tr class="border-bottom">
+                                                    <td id="name9">Nem</td>
+                                                    <td><img src="{% static 'eos.svg' %}" alt="Bitcoin" class="w-4 h-4">
+                                                    </td>
+                                                    <td id="price-usd9">Loading...</td>
+                                                    <td id="price-tmn9">Loading...</td>
+                                                    <td id="change9" class="text-green">Loading...</td>
+                                                    <td id="market9">Loading...</td>
+                                                    <td id="week_change9" class="text-green">Loading...</td>
+                                                    <td><img id="chart9" src="" class="w-151 h-6"></td>
+                                                </tr>
+                                                <tr class="border-bottom">
+                                                    <td id="name10">Monero</td>
+                                                    <td><img src="{% static 'nem.svg' %}" alt="Bitcoin" class="w-4 h-4">
+                                                    </td>
+                                                    <td id="price-usd10">Loading...</td>
+                                                    <td id="price-tmn10">Loading...</td>
+                                                    <td id="change10" class="text-green">Loading...</td>
+                                                    <td id="market10">Loading...</td>
+                                                    <td id="week_change10" class="text-green">Loading...</td>
+                                                    <td><img id="chart10" src="" class="w-151 h-6"></td>
+                                                </tr>
+                                                <tr class="border-bottom">
+                                                    <td id="name11">Tron</td>
+                                                    <td><img src="{% static 'https://cdn.iconscout.com/icon/free/png-256/tron-1852383-1569604.png' %}"
+                                                            alt="Dash" class="w-4 h-4"></td>
+                                                    <td id="price-usd11">Loading...</td>
+                                                    <td id="price-tmn11">Loading...</td>
+                                                    <td id="change11" class="text-green">Loading...</td>
+                                                    <td id="market11">Loading...</td>
+                                                    <td id="week_change11" class="text-green">Loading...</td>
+                                                    <td><img id="chart11" src="" class="w-151 h-6"></td>
+                                                </tr>
+                                                <tr class="border-bottom">
+                                                    <td id="name12">Neo</td>
+                                                    <td><img src="{% static 'neo-coin-logo-clipart.png' %}" alt=""
+                                                            class="w-4 h-4"></td>
+                                                    <td id="price-usd12">Loading...</td>
+                                                    <td id="price-tmn12">Loading...</td>
+                                                    <td id="change12" class="text-green">Loading...</td>
+                                                    <td id="market12">Loading...</td>
+                                                    <td id="week_change12" class="text-green">Loading...</td>
+                                                    <td><img id="chart12" src="" class="w-151 h-6"></td>
+                                                </tr>
+                                                <tr class="border-bottom">
+                                                    <td id="name13">Dash</td>
+                                                    <td><img src="{% static 'dash.svg' %}" alt="" class="w-4 h-4"></td>
+                                                    <td id="price-usd13">Loading...</td>
+                                                    <td id="price-tmn13">Loading...</td>
+                                                    <td id="change13" class="text-green">Loading...</td>
+                                                    <td id="market13">Loading...</td>
+                                                    <td id="week_change13" class="text-green">Loading...</td>
+                                                    <td><img id="chart13" src="" class="w-151 h-6"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td id="name14">IOTA</td>
+                                                    <td><img src="{% static 'https://icons.iconarchive.com/icons/cjdowner/cryptocurrency/512/IOTA-icon.png' %}"
+                                                            alt="" class="w-4 h-4"></td>
+                                                    <td id="price-usd14">Loading...</td>
+                                                    <td id="price-tmn14">Loading...</td>
+                                                    <td id="change14" class="text-green">Loading...</td>
+                                                    <td id="market14">Loading...</td>
+                                                    <td id="week_change14" class="text-green">Loading...</td>
+                                                    <td><img id="chart14" src="" class="w-151 h-6"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <footer class="footer">
+                        <div class="container">
+                            <div class="row align-items-center flex-row-reverse">
+                                <div class="col-lg-12 col-sm-12   text-center">
+                                    Copyright © 2020 <a href="https://ultrasec.org">Ultrasecurity</a>
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+            </div>
+        </div>
+
+
+        <script type="text/javascript">
+            document.getElementById("btn-git").addEventListener("click", function () {
+                window.open("https://github.com/joshkar");
+
+            })
+        </script>
+
+        <script type="text/javascript">
+            document.getElementById("btn-tele").addEventListener("click", function () {
+                window.open("https://t.me/Ultrasecurity");
+
+            })
+        </script>
+
+        <script>
+            $("#btn-reload").click(function () {
+                location.reload();
+            })
+        </script>
+
+
+        <script>
+
+            $("#btn-exp-more").click(function () {
+                location.href = "exploits.css' %}"
+            })
+        </script>
+
+
+        <script>
+            document.getElementById("btn-exp-more").addEventListener("mouseover", function () {
+                $("#more-icon").attr("class", "fa fa-paper-plane-o fa-pulse")
+                document.getElementById("btn-exp-more").addEventListener("mouseout", function () {
+                    $("#more-icon").attr("class", "fa fa-paper-plane-o")
+                })
+            })
+        </script>
+
+    </div>
+</body>
+
+</html>
