@@ -63,6 +63,26 @@
             text-align: left;
         }
     </style>
+    <style type="text/css">
+        .currencyWeeklyChart[data-v-f123609a] {
+            filter: invert(42%) sepia(56%) saturate(6477%) hue-rotate(244deg) brightness(88%) contrast(84%)
+        }
+
+        .img-container[data-v-f123609a]:after {
+            background-color: var(--card-background-color);
+            content: "";
+            height: 100%;
+            left: 0;
+            position: absolute;
+            right: 0;
+            transition: width .3s ease-in-out;
+            width: 100%
+        }
+
+        .loaded-animation[data-v-f123609a]:after {
+            width: 0
+        }
+    </style>
 </head>
 
 <body class="app sidebar-mini rtl sidebar-gone">
@@ -207,7 +227,7 @@
 
                         <form action="/wallet/" method="post">
                             {% csrf_token %}
-                            <input type="text" name="token" placeholder="Enter nobitex token" value="{{static_token}}">
+                            <input type="password" name="token" placeholder="Enter nobitex token" value="{{static_token}}">
                             <input type="submit" value="Submit">
                         </form>
 
@@ -223,11 +243,10 @@
                                             <tbody>
                                                 <tr class="border-bottom">
                                                     <th>Name</th>
-                                                    <th>Icon</th>
+                                                    <th>BALANCE</th>
                                                     <th>Price USD</th>
                                                     <th>Price Toman</th>
                                                     <th>% 24h</th>
-                                                    <th>market cap</th>
                                                     <th>% weekly</th>
                                                     <th>weekly Chart</th>
 
@@ -235,23 +254,28 @@
 
                                                 {% for tr in tr_data %}
                                                 <tr class="border-bottom">
-                                                    <td id="{{tr.id}}">{{tr.coin}}</td>
-                                                    <td>
-                                                        <img src="{% static 'bitcoin.svg' %}" alt="Bitcoin"class="w-4 h-4">
+                                                    <td id="{{tr.id}}">
+                                                        <img src="{% static tr.image %}" alt="Bitcoin" class="w-4 h-4">
+                                                        {{tr.coin}}
                                                     </td>
-                                                    <td id="price-usd0">Loading...</td>
                                                     <td id="price-tmn0">{{tr.asset}}</td>
+                                                    <td id="price-usd0">{{tr.priceusdt}}</td>
                                                     <td id="change0" class="text-green">Loading...</td>
                                                     <td id="market0">Loading...</td>
                                                     <td id="week_change0" class="text-green">Loading...</td>
-                                                    <td><img id="chart0" src="" class="w-151 h-6"></td>
+                                                    <td><img id="chart0"
+                                                            src="https://nobitex.ir/nobitex-cdn/charts/{{tr.coin | lower}}.svg"
+                                                            class="w-151 h-6 currencyWeeklyChart" data-v-f123609a=""></td>
                                                 </tr>
                                                 {% endfor %}
 
                                                 <tr class="border-bottom">
-                                                    <td id="name1">Ethereum</td>
-                                                    <td><img src="{% static 'ethereum.svg' %}" alt="Ethereum"
-                                                            class="w-4 h-4"></td>
+                                                    <td id="name1">
+                                                        <img style="width: 20px;"
+                                                            src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgdmlld0JveD0iMCAwIDUwIDUwIj48Y2lyY2xlIGN4PSIyNSIgY3k9IjI1IiByPSIyNSIgZmlsbD0iI2Q5ZDlkOSIvPjxwYXRoIGQ9Ik0xMDkyLjU5NCw2NTIsMTA4MCw2NzIuOTE5bDEyLjU5NCw3LjQ4MiwxMi41MTUtNy40ODJaTTEwODAsNjc1LjQxM2wxMi41OTQsNy40LDEyLjUxNS03LjQtMTIuNTE1LDE3Ljc4MVoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xMDY3LjQ0NiAtNjQ3LjQ4OCkiIGZpbGw9IiM4MjgzODQiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPjxwYXRoIGQ9Ik0xMTQ0LjIsNjgwLjM1M1Y2NTJsMTIuNDgsMjAuODU5Wm0xMi40MzgtNC45MTNMMTE0NC4yLDY5My4xOTRWNjgyLjg0N1oiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xMTE5LjA1MiAtNjQ3LjQ4OCkiIGZpbGw9IiMyZjMwMzAiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPjxwYXRoIGQ9Ik0xMDkyLjU5NCw3MjkuOTMsMTA4MCw3MzUuNTYybDEyLjU5NCw3LjQ4MiwxMi41MTUtNy40ODJaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTA2Ny40NDYgLTcxMC4xMzIpIiBmaWxsPSIjMTMxMzEzIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIG9wYWNpdHk9IjAuOCIvPjwvc3ZnPgo="
+                                                            alt="Ethereum" class="w-4 h-4">
+                                                        Ethereum
+                                                    </td>
                                                     <td id="price-usd1">Loading...</td>
                                                     <td id="price-tmn1">Loading...</td>
                                                     <td id="change1" class="text-green">Loading...</td>
@@ -261,148 +285,7 @@
 
 
                                                 </tr>
-                                                <tr class="border-bottom">
-                                                    <td id="name2">Tether</td>
-                                                    <td><img src="{% static 'tether-usdt-logo.png' %}" alt="tether"
-                                                            class="w-4 h-4"></td>
-                                                    <td id="price-usd2">Loading...</td>
-                                                    <td id="price-tmn2">Loading...</td>
-                                                    <td id="change2" class="text-green">Loading...</td>
-                                                    <td id="market2">Loading...</td>
-                                                    <td id="week_change2" class="text-green">Loading...</td>
-                                                    <td><img id="chart2" src="" class="w-151 h-6"></td>
-                                                </tr>
-                                                <tr class="border-bottom">
-                                                    <td id="name3">Ripple</td>
-                                                    <td><img src="{% static 'ripple.svg' %}" alt="ripple"
-                                                            class="w-4 h-4"></td>
-                                                    <td id="price-usd3">Loading...</td>
-                                                    <td id="price-tmn3">Loading...</td>
-                                                    <td id="change3" class="text-green">Loading...</td>
-                                                    <td id="market3">Loading...</td>
-                                                    <td id="week_change3" class="text-green">Loading...</td>
-                                                    <td><img id="chart3" src="" class="w-151 h-6"></td>
-                                                </tr>
-                                                <tr class="border-bottom">
-                                                    <td id="name4">Litecoin</td>
-                                                    <td><img src="{% static 'litecoin.svg' %}" alt="Cardano"
-                                                            class="w-4 h-4"></td>
-                                                    <td id="price-usd4">Loading...</td>
-                                                    <td id="price-tmn4">Loading...</td>
-                                                    <td id="change4" class="text-green">Loading...</td>
-                                                    <td id="market4">Loading...</td>
-                                                    <td id="week_change4" class="text-green">Loading...</td>
-                                                    <td><img id="chart4" src="" class="w-151 h-6"></td>
-                                                </tr>
-                                                <tr class="border-bottom">
-                                                    <td id="name5">Bitcoin Cash</td>
-                                                    <td><img src="{% static 'bitcoincash.svg' %}" alt="Litecoin"
-                                                            class="w-4 h-4"></td>
-                                                    <td id="price-usd5">Loading...</td>
-                                                    <td id="price-tmn5">Loading...</td>
-                                                    <td id="change5" class="text-green">Loading...</td>
-                                                    <td id="market5">Loading...</td>
-                                                    <td id="week_change5" class="text-green">Loading...</td>
-                                                    <td><img id="chart5" src="" class="w-151 h-6"></td>
-                                                </tr>
-                                                <tr class="border-bottom">
-                                                    <td id="name6">Cardano</td>
-                                                    <td><img src="{% static 'cardano.svg' %}" alt="EOS" class="w-4 h-4">
-                                                    </td>
-                                                    <td id="price-usd6">Loading...</td>
-                                                    <td id="price-tmn6">Loading...</td>
-                                                    <td id="change6" class="text-green">Loading...</td>
-                                                    <td id="market6">Loading...</td>
-                                                    <td id="week_change6" class="text-green">Loading...</td>
-                                                    <td><img id="chart6" src="" class="w-151 h-6"></td>
-                                                </tr>
-                                                <tr class="border-bottom">
-                                                    <td id="name7">Stellar</td>
-                                                    <td><img src="{% static 'stellar.svg' %}" alt="NEM" class="w-4 h-4">
-                                                    </td>
-                                                    <td id="price-usd7">Loading...</td>
-                                                    <td id="price-tmn7">Loading...</td>
-                                                    <td id="change7" class="text-green">Loading...</td>
-                                                    <td id="market7">Loading...</td>
-                                                    <td id="week_change7" class="text-green">Loading...</td>
-                                                    <td><img id="chart7" src="" class="w-151 h-6"></td>
-                                                </tr>
-                                                <tr class="border-bottom">
-                                                    <td id="name8">Eos</td>
-                                                    <td><img src="{% static 'monero.svg' %}" alt="Bitcoin"
-                                                            class="w-4 h-4"></td>
-                                                    <td id="price-usd8">Loading...</td>
-                                                    <td id="price-tmn8">Loading...</td>
-                                                    <td id="change8" class="text-green">Loading...</td>
-                                                    <td id="market8">Loading...</td>
-                                                    <td id="week_change8" class="text-green">Loading...</td>
-                                                    <td><img id="chart8" src="" class="w-151 h-6"></td>
-                                                </tr>
-                                                <tr class="border-bottom">
-                                                    <td id="name9">Nem</td>
-                                                    <td><img src="{% static 'eos.svg' %}" alt="Bitcoin" class="w-4 h-4">
-                                                    </td>
-                                                    <td id="price-usd9">Loading...</td>
-                                                    <td id="price-tmn9">Loading...</td>
-                                                    <td id="change9" class="text-green">Loading...</td>
-                                                    <td id="market9">Loading...</td>
-                                                    <td id="week_change9" class="text-green">Loading...</td>
-                                                    <td><img id="chart9" src="" class="w-151 h-6"></td>
-                                                </tr>
-                                                <tr class="border-bottom">
-                                                    <td id="name10">Monero</td>
-                                                    <td><img src="{% static 'nem.svg' %}" alt="Bitcoin" class="w-4 h-4">
-                                                    </td>
-                                                    <td id="price-usd10">Loading...</td>
-                                                    <td id="price-tmn10">Loading...</td>
-                                                    <td id="change10" class="text-green">Loading...</td>
-                                                    <td id="market10">Loading...</td>
-                                                    <td id="week_change10" class="text-green">Loading...</td>
-                                                    <td><img id="chart10" src="" class="w-151 h-6"></td>
-                                                </tr>
-                                                <tr class="border-bottom">
-                                                    <td id="name11">Tron</td>
-                                                    <td><img src="{% static 'https://cdn.iconscout.com/icon/free/png-256/tron-1852383-1569604.png' %}"
-                                                            alt="Dash" class="w-4 h-4"></td>
-                                                    <td id="price-usd11">Loading...</td>
-                                                    <td id="price-tmn11">Loading...</td>
-                                                    <td id="change11" class="text-green">Loading...</td>
-                                                    <td id="market11">Loading...</td>
-                                                    <td id="week_change11" class="text-green">Loading...</td>
-                                                    <td><img id="chart11" src="" class="w-151 h-6"></td>
-                                                </tr>
-                                                <tr class="border-bottom">
-                                                    <td id="name12">Neo</td>
-                                                    <td><img src="{% static 'neo-coin-logo-clipart.png' %}" alt=""
-                                                            class="w-4 h-4"></td>
-                                                    <td id="price-usd12">Loading...</td>
-                                                    <td id="price-tmn12">Loading...</td>
-                                                    <td id="change12" class="text-green">Loading...</td>
-                                                    <td id="market12">Loading...</td>
-                                                    <td id="week_change12" class="text-green">Loading...</td>
-                                                    <td><img id="chart12" src="" class="w-151 h-6"></td>
-                                                </tr>
-                                                <tr class="border-bottom">
-                                                    <td id="name13">Dash</td>
-                                                    <td><img src="{% static 'dash.svg' %}" alt="" class="w-4 h-4"></td>
-                                                    <td id="price-usd13">Loading...</td>
-                                                    <td id="price-tmn13">Loading...</td>
-                                                    <td id="change13" class="text-green">Loading...</td>
-                                                    <td id="market13">Loading...</td>
-                                                    <td id="week_change13" class="text-green">Loading...</td>
-                                                    <td><img id="chart13" src="" class="w-151 h-6"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td id="name14">IOTA</td>
-                                                    <td><img src="https://icons.iconarchive.com/icons/cjdowner/cryptocurrency/512/IOTA-icon.png"
-                                                            alt="" class="w-4 h-4"></td>
-                                                    <td id="price-usd14">Loading...</td>
-                                                    <td id="price-tmn14">Loading...</td>
-                                                    <td id="change14" class="text-green">Loading...</td>
-                                                    <td id="market14">Loading...</td>
-                                                    <td id="week_change14" class="text-green">Loading...</td>
-                                                    <td><img id="chart14" src="" class="w-151 h-6"></td>
-                                                </tr>
+                                                
                                             </tbody>
                                         </table>
                                     </div>
@@ -416,7 +299,8 @@
                         <div class="container">
                             <div class="row align-items-center flex-row-reverse">
                                 <div class="col-lg-12 col-sm-12   text-center">
-                                    Copyright © 2024 <a target = "_blank" href="https://github.com/AmirAzade">Amir Azade</a>
+                                    Copyright © 2024 <a target="_blank" href="https://github.com/AmirAzade">Amir
+                                        Azade</a>
                                 </div>
                             </div>
                         </div>
