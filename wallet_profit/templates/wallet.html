@@ -225,7 +225,7 @@
                             </ol>
                         </div>
 
-                        <form action="/wallet/" method="post">
+                        <form action="/" method="post">
                             {% csrf_token %}
                             <input type="password" name="token" placeholder="Enter nobitex token" value="{{static_token}}">
                             <input type="submit" value="Submit">
@@ -243,9 +243,9 @@
                                             <tbody>
                                                 <tr class="border-bottom">
                                                     <th>Name</th>
+                                                    <th>ASSET</th>
                                                     <th>BALANCE</th>
                                                     <th>Price USD</th>
-                                                    <th>Price Toman</th>
                                                     <th>% 24h</th>
                                                     <th>% weekly</th>
                                                     <th>weekly Chart</th>
@@ -255,12 +255,12 @@
                                                 {% for tr in tr_data %}
                                                 <tr class="border-bottom">
                                                     <td id="{{tr.id}}">
-                                                        <img src="{% static tr.image %}" alt="Bitcoin" class="w-4 h-4">
+                                                        <img src="{% static tr.image %}" alt = "icon" class="w-4 h-4">
                                                         {{tr.coin}}
                                                     </td>
-                                                    <td id="price-tmn0">{{tr.asset}}</td>
+                                                    <td id="change0" class="text-green">{{tr.asset}}</td>
+                                                    <td id="price-tmn0">{{tr.balance}}</td>
                                                     <td id="price-usd0">{{tr.priceusdt}}</td>
-                                                    <td id="change0" class="text-green">Loading...</td>
                                                     <td id="market0">Loading...</td>
                                                     <td id="week_change0" class="text-green">Loading...</td>
                                                     <td><img id="chart0"
@@ -299,8 +299,8 @@
                         <div class="container">
                             <div class="row align-items-center flex-row-reverse">
                                 <div class="col-lg-12 col-sm-12   text-center">
-                                    Copyright © 2024 <a target="_blank" href="https://github.com/AmirAzade">Amir
-                                        Azade</a>
+                                    <!-- Copyright © 2024 -->
+                                    Created By <a target="_blank" href="https://github.com/AmirAzade">Amir Azade</a>
                                 </div>
                             </div>
                         </div>
