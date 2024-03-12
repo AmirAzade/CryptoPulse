@@ -10,6 +10,13 @@ all_coins = ['BTC', 'ETH', 'LTC', 'XRP', 'BCH', 'BNB', 'EOS', 'XLM', 'ETC', 'TRX
 # coins = ['BTC', 'ETH', 'LTC', 'XRP', 'BNB', 'ETC', 'TRX', 'DOGE', 'DAI', 'ADA', 'SHIB', 'AXS', 'MANA', 'SAND', 'AVAX', 'USDC']
 coins = ['BTC', 'TRX', 'LTC', 'DOGE']
 
+def format_float(number):
+    # Format the number to up to 8 decimal places
+    formatted_number = "{:.5f}".format(number)
+    # Remove trailing zeros
+    formatted_number = formatted_number.rstrip('0').rstrip('.')
+    return float(formatted_number)
+
 def display_number(request):
     if request.method == 'POST':
 
@@ -17,10 +24,10 @@ def display_number(request):
         
 
         static_token = token
-        available_coins = fill_chart2(token)
+        available_coins, total_asset = fill_chart2(token)
 
         
-        return render(request, 'wallet.html', {'tr_data': available_coins, 'static_token' : static_token})
+        return render(request, 'wallet.html', {'tr_data': available_coins, 'total_asset' : format_float(total_asset),'static_token' : static_token})
         
 
         
@@ -64,6 +71,7 @@ def fill_chart2(token):
 
     id_tracker = 0
     available_coins = []
+    total_asset = 0
 
     wallet_count = int(len(response['wallets']))
     for i in range(wallet_count):
@@ -88,7 +96,8 @@ def fill_chart2(token):
                 
 
 
-            available_coins.append({'id' : id_tracker, 'coin' : str(item['currency']).upper(), 'balance' : item['balance'], 'priceusdt' : float(last_price['lastTradePrice']), 'asset' : float(float(item['balance']) * float(last_price['lastTradePrice'])), 'image' : f'{currency_name.lower()}.svg'})
+            available_coins.append({'id' : id_tracker, 'coin' : str(item['currency']).upper(), 'balance' : format_float(float(item['balance'])), 'priceusdt' : format_float(float(last_price['lastTradePrice'])), 'asset' : format_float(float(float(item['balance']) * float(last_price['lastTradePrice']))), 'image' : f'{currency_name.lower()}.svg'})
+            total_asset+= float(float(item['balance']) * float(last_price['lastTradePrice']))
             id_tracker += 1
 
-    return available_coins
+    return available_coins, total_asset

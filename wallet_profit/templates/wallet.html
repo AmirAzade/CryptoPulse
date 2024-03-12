@@ -38,6 +38,8 @@
     <link href="{% static 'icons.css' %}" rel="stylesheet">
     <link href="{% static 'font-awesome.min.css' %}" rel="stylesheet">
 
+    <!-- <link rel="stylesheet" href="{% static 'token_taker.css' %}"> -->
+
     <style type="text/css">
         .jqstooltip {
             position: absolute;
@@ -85,7 +87,7 @@
     </style>
 </head>
 
-<body class="app sidebar-mini rtl sidebar-gone">
+<body style="user-select: none;" class="app sidebar-mini rtl sidebar-gone">
     <div class="horizontalMenucontainer">
 
 
@@ -102,7 +104,8 @@
                     <div class="container">
                         <div class="d-flex">
                             <a class="header-brand" href="{% static 'index.css' %}">
-                                <img src="{% static 'main_logo3.png' %}" class="header-brand-img main-logo" alt="Hogo logo">
+                                <img src="{% static 'main_logo3.png' %}" class="header-brand-img main-logo"
+                                    alt="Hogo logo">
                                 <img src="{% static 'icon.png' %}" class="header-brand-img icon-logo" alt="Hogo logo">
                             </a><!-- logo-->
                             <!-- <a id="horizontal-navtoggle" class="animated-arrow hor-toggle"><span></span></a>
@@ -227,15 +230,86 @@
 
                         <form action="/" method="post">
                             {% csrf_token %}
-                            <input type="password" name="token" placeholder="Enter nobitex token" value="{{static_token}}">
+                            <input type="password" name="token" placeholder="Enter nobitex token"
+                                value="{{static_token}}">
                             <input type="submit" value="Submit">
                         </form>
+                        <br><br><br>
+
+                        <div style="display: table; clear: both; width:100%;">
+                            <div style="float:left; width:50%;">
+                                <p style="white-space: nowrap;">
+                                <h1>Total Asset: {{total_asset}}$</h1>
+                                </p>
+                                <p style="white-space: nowrap;">
+                                <h3>Today Profit: test</h3>
+                                <h3>Last Week Profit: test</h3>
+                                <h3>Last Month Profit: test</h3>
+                                <h3>Total Profit: test</h3>
+                                </p>
+
+
+                            </div>
+                            <div id="circle_chart" style="float:right; width:50%;">Right content
+                            </div>
+                        </div>
+
+                        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+                        {{ tr_data|json_script:"trData" }}
+
+                        <script type="text/javascript">
+                            const trData = JSON.parse(document.getElementById('trData').textContent);
+
+                            // Load google charts
+                            google.charts.load('current', { 'packages': ['corechart'] });
+                            google.charts.setOnLoadCallback(drawChart);
+
+                            // Draw the chart and set the chart values
+                            function drawChart() {
+                                var data = google.visualization.arrayToDataTable([
+                                    ['Coin', 'Assets'],
+                                    ['Other', 0],
+                                ]);
+
+                                for (i in trData) {
+                                    data.addRow(Array(trData[i]['coin'], trData[i]['asset']));
+
+                                }
+
+                                // Optional; add a title and set the width and height of the chart
+                                var options = {
+                                    'title': '',
+                                    'width': 550,
+                                    'height': 400,
+                                    'backgroundColor': '#364659',
+                                    'is3D': false
+                                    // 'chartArea': {
+                                    //     'backgroundColor': {
+                                    //         'gradient': {
+                                    //             'color1': '#000000', // Start color for gradient
+                                    //             'color2': '#000000', // Finish color for gradient
+                                    //             'x1': '0%', 'y1': '0%', // Start position of the gradient
+                                    //             'x2': '100%', 'y2': '100%', // End position of the gradient
+                                    //             'useObjectBoundingBoxUnits': true // If true, the boundary for x1, y1, x2, and y2 is the box. If false, it's the entire chart.
+                                    //         }
+                                    //     }
+                                    // }
+                                };
+
+
+                                // Display the chart inside the <div> element with id="piechart"
+                                var chart = new google.visualization.PieChart(document.getElementById('circle_chart'));
+                                chart.draw(data, options);
+                            }
+                        </script>
+
 
                         <div class="row">
                             <!-- table crypto  -->
                             <div class="card mt-5  ">
                                 <div class="card-header border-0">
-                                    <h3 class="card-title">Last crypto price</h3>
+                                    <h3 class="card-title">Last Your Assets Status</h3>
                                 </div>
                                 <div class="table-responsive">
                                     <div class="table-responsive">
@@ -255,7 +329,7 @@
                                                 {% for tr in tr_data %}
                                                 <tr class="border-bottom">
                                                     <td id="{{tr.id}}">
-                                                        <img src="{% static tr.image %}" alt = "icon" class="w-4 h-4">
+                                                        <img src="{% static tr.image %}" alt="icon" class="w-4 h-4">
                                                         {{tr.coin}}
                                                     </td>
                                                     <td id="change0" class="text-green">{{tr.asset}}</td>
@@ -265,7 +339,8 @@
                                                     <td id="week_change0" class="text-green">Loading...</td>
                                                     <td><img id="chart0"
                                                             src="https://nobitex.ir/nobitex-cdn/charts/{{tr.coin | lower}}.svg"
-                                                            class="w-151 h-6 currencyWeeklyChart" data-v-f123609a=""></td>
+                                                            class="w-151 h-6 currencyWeeklyChart" data-v-f123609a="">
+                                                    </td>
                                                 </tr>
                                                 {% endfor %}
 
@@ -285,7 +360,7 @@
 
 
                                                 </tr>
-                                                
+
                                             </tbody>
                                         </table>
                                     </div>
