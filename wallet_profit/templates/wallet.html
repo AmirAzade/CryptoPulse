@@ -9,7 +9,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'favicon.png' %}">
 
     <!-- Title -->
-    <title>Tools</title>
+    <title>Crypto Pulse</title>
 
     <!--Bootstrap.min css-->
     <!-- <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}"> -->
@@ -18,25 +18,19 @@
     <link href="{% static 'style.css' %}" rel="stylesheet">
 
     <!-- Custom scroll bar css-->
-    <link href="{% static 'jquery.mCustomScrollbar.css' %}" rel="stylesheet">
 
     <!-- Horizontal-menu css -->
     <link href="{% static 'fade-down.css' %}" rel="stylesheet">
     <link href="{% static 'dark-horizontalmenu.css' %}" rel="stylesheet">
 
     <!--Daterangepicker css-->
-    <link href="{% static 'daterangepicker.css' %}" rel="stylesheet">
 
     <!-- Sidebar Accordions css -->
-    <link href="{% static 'dark-easy-responsive-tabs.css' %}" rel="stylesheet">
 
     <!-- Rightsidebar css -->
-    <link href="{% static 'dark-sidebar.css' %}" rel="stylesheet">
 
     <!---Font icons css-->
-    <link href="{% static 'plugin.css' %}" rel="stylesheet">
-    <link href="{% static 'icons.css' %}" rel="stylesheet">
-    <link href="{% static 'font-awesome.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'TokenTaker.css' %}">
 
     <!-- <link rel="stylesheet" href="{% static 'token_taker.css' %}"> -->
 
@@ -85,6 +79,10 @@
             width: 0
         }
     </style>
+
+    <style>
+
+    </style>
 </head>
 
 <body style="user-select: none;" class="app sidebar-mini rtl sidebar-gone">
@@ -103,7 +101,7 @@
                 <div class="app-header header hor-topheader d-flex fixed-header">
                     <div class="container">
                         <div class="d-flex">
-                            <a class="header-brand" href="{% static 'index.css' %}">
+                            <a class="header-brand" href="#">
                                 <img src="{% static 'main_logo3.png' %}" class="header-brand-img main-logo"
                                     alt="Hogo logo">
                                 <img src="{% static 'icon.png' %}" class="header-brand-img icon-logo" alt="Hogo logo">
@@ -143,35 +141,11 @@
                             <div class="overlapblackbg"></div>
 
                             <ul class="horizontalMenu-list">
-                                <li aria-haspopup="true"><a href="{% static 'index.css' %}" class="active"><i
+                                <li aria-haspopup="true"><a href="#" class="active"><i
                                             class="fa fa-coffee"></i> Dashboard</a></li>
 
-                                <li aria-haspopup="true"><span class="horizontalMenu-click"><i
-                                            class="horizontalMenu-arrow fa fa-angle-down"></i></span><a href="#"
-                                        class="sub-icon "><i class="typcn typcn-device-desktop hor-icon"></i>
-                                        Information Gathering <i class="fa fa-angle-down horizontal-icon"></i></a>
-                                    <ul class="sub-menu">
-                                        <li aria-haspopup="true"><a href="{% static 'bypass-cloud.css' %}">Bypass Cloud
-                                                Flare </a>
-                                        </li>
-                                        <li aria-haspopup="true"><a href="{% static 'cms-detect.css' %}">Cms Detect</a>
-                                        </li>
-                                        <li aria-haspopup="true"><a href="{% static 'trace.css' %}">Trace Toute</a></li>
-                                        <li aria-haspopup="true"><a href="{% static 'reverseip.css' %}">Reverse IP</a>
-                                        </li>
-                                        <li aria-haspopup="true"><a href="{% static 'port-scan.css' %}">Port Scan</a>
-                                        </li>
-                                        <li aria-haspopup="true"><a href="{% static 'ip-loc.css' %}">IP location
-                                                Finder</a></li>
-                                        <li aria-haspopup="true"><a href="{% static 'http-header.css' %}">Show HTTP
-                                                Header</a></li>
-                                        <li aria-haspopup="true"><a href="{% static 'shared-dns.css' %}">Find Shared
-                                                DNS</a></li>
-                                        <li aria-haspopup="true"><a href="{% static 'whois.css' %}">Whois</a></li>
-                                        <li aria-haspopup="true"><a href="{% static 'dns-lookup.css' %}">DNS Lookup</a>
-                                        </li>
-                                    </ul>
-                                </li>
+                                <li aria-haspopup="true"><a href="{% static 'exploits.css' %}" class=""><i
+                                            class="typcn typcn-arrow-move-outline"></i> Exploits</a></li>
 
                                 <li aria-haspopup="true"><a href="{% static 'exploits.css' %}" class=""><i
                                             class="typcn typcn-arrow-move-outline"></i> Exploits</a></li>
@@ -230,9 +204,22 @@
 
                         <form action="/" method="post">
                             {% csrf_token %}
-                            <input type="password" name="token" placeholder="Enter nobitex token"
+                            <div class="TokenContainer">
+                                <div class="container__item">
+                                    <form class="form">
+                                        <input type="password" name="token" class="form__field"
+                                            placeholder="Enter nobitex token" value="{{static_token}}" />
+                                        <button type="submit" class="TokenBtn TokenBtn--primary TokenBtn--inside"
+                                            value="Submit">Send</button>
+                                    </form>
+                                </div>
+
+                                <div class="container__item container__item--bottom">
+                                </div>
+                            </div>
+                            <!-- <input type="password" name="token" placeholder="Enter nobitex token"
                                 value="{{static_token}}">
-                            <input type="submit" value="Submit">
+                            <input type="submit" value="Submit"> -->
                         </form>
                         <br><br><br>
 
@@ -250,7 +237,7 @@
 
 
                             </div>
-                            <div id="circle_chart" style="float:right; width:50%;">Right content
+                            <div id="circle_chart" style="float:right; width:40%; margin: 0 auto !important;">
                             </div>
                         </div>
 
@@ -259,7 +246,7 @@
                         {{ tr_data|json_script:"trData" }}
                         {{ total_asset|json_script:"totalAsset" }}
 
-                        
+
                         <script type="text/javascript">
                             const trData = JSON.parse(document.getElementById('trData').textContent);
                             const totalAsset = JSON.parse(document.getElementById('totalAsset').textContent);
@@ -279,16 +266,16 @@
                                 var index = dataArray.findIndex(item => item[0] === 'Other');
 
                                 for (i in trData) {
-                                    
-                                    if(trData[i]['asset'] < totalAsset*0.05) {
-                                        dataArray[index][1] = 54;
-
-                                        //console.log(dataArray.getValue(0,0));
-                                        // data[1] = Array(['Other'], data[1][1] + trData[i]['asset'])
+                                    if (trData[i]['asset'] < totalAsset * 0.05) {
+                                        dataArray[index][1] += trData[i]['asset'];
                                     }
                                     else {
                                         dataArray.push(Array(trData[i]['coin'], trData[i]['asset']));
                                     }
+                                }
+
+                                if (dataArray[index][1] < totalAsset * 0.015) {
+                                    dataArray[index][1] = 0;
                                 }
                                 var data = google.visualization.arrayToDataTable(dataArray);
                                 console.log(data);
@@ -297,9 +284,30 @@
                                 var options = {
                                     'title': '',
                                     'width': 550,
-                                    'height': 400,
-                                    'backgroundColor': '#364659',
-                                    'is3D': false
+                                    'height': 300,
+                                    'backgroundColor': '#293544',
+                                    'is3D': false,
+                                    'hAxis': {
+                                        'textStyle': {
+                                            // 'color': '#FFF' // Change the color of horizontal axis text
+                                        }
+                                    },
+                                    'vAxis': {
+                                        'textStyle': {
+                                            // 'color': '#FFF' // Change the color of vertical axis text
+                                        }
+                                    },
+                                    'legendTextStyle': {
+                                        'color': '#FFF', // Change the color of legend text
+                                        'fontSize': 18
+                                    },
+                                    'titleTextStyle': {
+                                        // 'color': '#FFF' // Change the color of chart title text
+                                    },
+                                    'chartArea': {
+                                        'width': '100%', // Ensure the chart area also takes up 100% of the chart's width
+                                        'height': '100%' // Ensure the chart area also takes up 100% of the chart's height
+                                    }
                                     // 'chartArea': {
                                     //     'backgroundColor': {
                                     //         'gradient': {
@@ -333,9 +341,9 @@
                                             <tbody>
                                                 <tr class="border-bottom">
                                                     <th>Name</th>
-                                                    <th>ASSET</th>
+                                                    <th>ASSET (USDT)</th>
                                                     <th>BALANCE</th>
-                                                    <th>Price USD</th>
+                                                    <th>Price (USDT)</th>
                                                     <th>% 24h</th>
                                                     <th>% weekly</th>
                                                     <th>weekly Chart</th>
