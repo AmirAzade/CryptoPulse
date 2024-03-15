@@ -1,6 +1,6 @@
 # ProfitManager
 <h1 align="center">
   <br>
-  <img style = "width:70%;" src=".imgs/roglight.jpeg" alt="RogLight">
+  <img style = "width:70%;" src="https://raw.githubusercontent.com/AmirAzade/CryptoPulse/main/wallet_profit/static/favicon.png" alt="RogLight">
 </h1>
 <h2> Coming Soon... </h2>
