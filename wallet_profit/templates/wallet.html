@@ -257,9 +257,13 @@
                         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
                         {{ tr_data|json_script:"trData" }}
+                        {{ total_asset|json_script:"totalAsset" }}
 
+                        
                         <script type="text/javascript">
                             const trData = JSON.parse(document.getElementById('trData').textContent);
+                            const totalAsset = JSON.parse(document.getElementById('totalAsset').textContent);
+
 
                             // Load google charts
                             google.charts.load('current', { 'packages': ['corechart'] });
@@ -267,15 +271,27 @@
 
                             // Draw the chart and set the chart values
                             function drawChart() {
-                                var data = google.visualization.arrayToDataTable([
+                                var dataArray = [
                                     ['Coin', 'Assets'],
                                     ['Other', 0],
-                                ]);
+                                ];
+
+                                var index = dataArray.findIndex(item => item[0] === 'Other');
 
                                 for (i in trData) {
-                                    data.addRow(Array(trData[i]['coin'], trData[i]['asset']));
+                                    
+                                    if(trData[i]['asset'] < totalAsset*0.05) {
+                                        dataArray[index][1] = 54;
 
+                                        //console.log(dataArray.getValue(0,0));
+                                        // data[1] = Array(['Other'], data[1][1] + trData[i]['asset'])
+                                    }
+                                    else {
+                                        dataArray.push(Array(trData[i]['coin'], trData[i]['asset']));
+                                    }
                                 }
+                                var data = google.visualization.arrayToDataTable(dataArray);
+                                console.log(data);
 
                                 // Optional; add a title and set the width and height of the chart
                                 var options = {

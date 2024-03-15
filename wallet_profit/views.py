@@ -63,15 +63,29 @@ def fill_chart(token):
     return available_coins
 
 def fill_chart2(token):
+    available_coins = []
+    total_asset = 0
+
+    usdt_url = 'https://api.nobitex.ir/users/wallets/balance'
+    usdt_headers = {
+        'Authorization': 'Token d8f40b150de96d3557dba79481f42b9cdfdc4a1c',
+    }
+    usdt_data = {
+        'currency': 'usdt'
+    }
+    usdt_response = requests.post(usdt_url, headers=usdt_headers, data=usdt_data).json()['balance']
+    total_asset+= float(usdt_response)
+    available_coins.append({'id' : 0, 'coin' : "USDT", 'balance' : format_float(float(usdt_response)), 'priceusdt' : 1, 'asset' : format_float(float(usdt_response)), 'image' : f'{"usdt".lower()}.svg'})
+
+
+
     url = 'https://api.nobitex.ir/users/wallets/list'
     headers = {
         'Authorization': f'Token {token}'
     }
     response = requests.get(url, headers=headers).json()
 
-    id_tracker = 0
-    available_coins = []
-    total_asset = 0
+    id_tracker = 1
 
     wallet_count = int(len(response['wallets']))
     for i in range(wallet_count):
@@ -99,5 +113,9 @@ def fill_chart2(token):
             available_coins.append({'id' : id_tracker, 'coin' : str(item['currency']).upper(), 'balance' : format_float(float(item['balance'])), 'priceusdt' : format_float(float(last_price['lastTradePrice'])), 'asset' : format_float(float(float(item['balance']) * float(last_price['lastTradePrice']))), 'image' : f'{currency_name.lower()}.svg'})
             total_asset+= float(float(item['balance']) * float(last_price['lastTradePrice']))
             id_tracker += 1
+
+
+    
+    
 
     return available_coins, total_asset
